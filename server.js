@@ -3,8 +3,8 @@ var cheerio = require("cheerio");
 var axios = require("axios");
 
 console.log("\n**************************\n" +
-    "Grabbing every thread name and link \n" +
-    "from reddit's webdev board:" +
+    "Grabbing every articles title, sub-title, meta data, and link \n" +
+    "from fashionista.com Fashion Week section:" +
     "\n*******************\n");
 
 axios.get("https://fashionista.com/fashion-week").then(function(response) {
