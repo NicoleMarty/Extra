@@ -3,35 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Fashion Scraper</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-
-    <link rel="stylesheet" href="style.css">
-
+    <title>User Schema</title>
+    <style>
+        input {
+            display: block;
+            font-size: 24px;
+            height: 36px;
+        }
+    </style>
 </head>
 
-<body class="container">
-    <h3 class="header">Fashion Frontend</h3>
-
-    <table id="results">
-        <thead>
-            <tr>
-                <th id="content-content">Content</th>
-                <th id="content-link">Link</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Results from DB here -->
-        </tbody>
-    </table>
-    <script src="app.js"></script>
+<body>
+    <form action="/submit" method="post">
+        <input type="text" name="username" placeholder="username">
+        <input type="password" name="password" placeholder="password">
+        <input type="text" name="email" placeholder="email">
+        <input type="submit">
+    </form>
 </body>
 
 </html>
