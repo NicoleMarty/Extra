@@ -48,26 +48,21 @@ app.get("/scrape", function(req, res) {
     axios.get("https://fashionista.com/fashion-week").then(function(response) {
         var $ = cheerio.load(response.data);
         var results = [];
-        $("div.m-card--content").each(function(i, element) {
+        $("div.l-grid--item").each(function(i, element) {
             var content = $(element).text();
-            $("phoenix-super-link").each(function(i, element) {
-                var link = $(element).attr("href");
-                // If the found elements have the content and link
-                if (content && link) {
-                    db.scrapedData.insert({
-                            content: content,
-                            link: link
-                        },
-                        function(error, inserted) {
-                            if (error) {
-                                console.log(error);
-                            } else {
-                                console.log(inserted);
-                            }
-                        })
-                }
-
-            });
+            // If the found elements have the content and link
+            if (content) {
+                db.scrapedData.insert({
+                        content: content,
+                    },
+                    function(error, inserted) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log(inserted);
+                        }
+                    })
+            }
         });
     });
     // Send a "Scrape Complete" message to the browser
