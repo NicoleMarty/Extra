@@ -50,10 +50,12 @@ app.get("/scrape", function(req, res) {
         var results = [];
         $("div.l-grid--item").each(function(i, element) {
             var content = $(element).text();
+            var link = $(element).children().attr("href");
             // If the found elements have the content and link
-            if (content) {
+            if (content && link) {
                 db.scrapedData.insert({
                         content: content,
+                        link: link
                     },
                     function(error, inserted) {
                         if (error) {
