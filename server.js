@@ -55,7 +55,8 @@ app.get("/scrape", function(req, res) {
             if (content && link) {
                 db.fashion.insert({
                         content: content,
-                        link: "https://fashionista.com" + link
+                        link: "https://fashionista.com" + link,
+
                     },
                     function(error, inserted) {
                         if (error) {
