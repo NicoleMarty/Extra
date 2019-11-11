@@ -26,7 +26,7 @@ app.get("/", function(req, res) {
 // Retrieve data from the db
 app.get("/all", function(req, res) {
     // Find all results from the scrapedData collection in the db
-    db.scrapedData.find({}, function(error, found) {
+    db.fashion.find({}, function(error, found) {
         // Throw any errors to console
         if (error) {
             console.log(error);
@@ -53,7 +53,7 @@ app.get("/scrape", function(req, res) {
             var link = $(element).children().attr("href");
             // If the found elements have the content and link
             if (content && link) {
-                db.scrapedData.insert({
+                db.fashion.insert({
                         content: content,
                         link: "https://fashionista.com" + link
                     },
