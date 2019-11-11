@@ -52,7 +52,7 @@ app.get("/", function(req, res) {
 // Retrieve data from the db
 app.get("/all", function(req, res) {
     // Find all results from the scrapedData collection in the db
-    db.fashion.find({}, function(error, found) {
+    db.scrapedData.find({}, function(error, found) {
         // Throw any errors to console
         if (error) {
             console.log(error);
@@ -73,13 +73,12 @@ console.log("\n**************************\n" +
 app.get("/scrape", function(req, res) {
     axios.get("https://fashionista.com/fashion-week").then(function(response) {
         var $ = cheerio.load(response.data);
-        var results = [];
         $("div.l-grid--item").each(function(i, element) {
             var content = $(element).text();
             var link = $(element).children().attr("href");
             // If the found elements have the content and link
             if (content && link) {
-                db.fashion.insert({
+                db.scrapedData.insert({
                         content: content,
                         link: "https://fashionista.com" + link,
 
