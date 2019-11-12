@@ -4,17 +4,22 @@ var express = require("express");
 var mongojs = require("mongojs");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
+var logger = require("morgan");
+var path = require("path");
+
 // Enable scraping
 var cheerio = require("cheerio");
 var axios = require("axios");
 
 //var db = require("./models");
 
+
 // Initialize express
 var app = express();
 var PORT = process.env.PORT || 3000;
 
 // Middleware
+app.use(logger("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
@@ -47,6 +52,9 @@ db.on("error", function(error) {
 // Main route (Hello Fabulous)
 app.get("/", function(req, res) {
     res.send("Hello Fabulous");
+    res.sendFile(path.join(__dirname + "./public/index.html"));
+
+
 });
 
 // Retrieve data from the db
