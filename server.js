@@ -35,8 +35,9 @@ db.on("error", function (error) {
 });
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/mongolab-clean-84739", { useNewUrlParser: true });
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongolab-clean-84739";
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+
 
 
 // ROUTES
