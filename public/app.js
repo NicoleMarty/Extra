@@ -41,6 +41,16 @@ $(document).on("click", "p", function () {
             }
         });
 });
+function getNotes() {
+    $("#notes").empty();
+    $.getJSON("/notes", function (data) {
+        for (var i = 0; i < data.length; i++) {
+            $("#notes").prepend("<p class='data-entry' data-id=" + data[i]._id + "><span class='dataTitle' data-id=" +
+                data[i]._id + ">" + data[i].title + "</span><span class=delete>X</span></p>");
+        }
+    });
+}
+getNotes();
 
 // When you click the savenote button
 $(document).on("click", "#savenote", function () {

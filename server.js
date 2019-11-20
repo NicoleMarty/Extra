@@ -35,6 +35,7 @@ db.on("error", function (error) {
 });
 
 // Connect to the Mongo DB
+mongoose.connect("mongodb://localhost/populatedb", { useNewUrlParser: true });
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongolab-clean-84739";
 
 
@@ -82,15 +83,13 @@ app.get("/", function (req, res) {
 // Route for retrieving all Notes from the db
 app.get("/notes", function (req, res) {
     // Find all Notes
-    db.Note.find({ _id: req.params.id })
-        .then(function (dbNote) {
-            // If all Notes are successfully found, send them back to the client
+    db.Note.find({}, function (error, dbNote) {
+        if (error) {
+            console.log(error);
+        } else {
             res.json(dbNote);
-        })
-        .catch(function (err) {
-            // If an error occurs, send the error back to the client
-            res.json(err);
-        });
+        }
+    })
 });
 
 // Route for saving a new Note to the db and associating it with a User
@@ -133,7 +132,7 @@ app.get("/articles/:id", function (req, res) {
     // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
     db.Article.findOne({ _id: req.params.id })
         // ..and populate all of the notes associated with it
-        .populate(data[i].note)
+        .populate(dbNote)
         .then(function (dbArticle) {
             // If we were able to successfully find an Article with the given id, send it back to the client
             res.json(dbArticle);
